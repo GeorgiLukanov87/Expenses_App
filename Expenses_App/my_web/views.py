@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from Expenses_App.my_web.forms import ProfileCreateForm
+from Expenses_App.my_web.forms import ProfileCreateForm, ProfileEditForm
 from Expenses_App.my_web.models import Profile, Expense
 
 
@@ -49,7 +49,25 @@ def profile_details(request):
 
 
 def edit_profile(request):
-    return render(request, 'profile/profile-edit.html')
+    profile = Profile.objects.first()
+    if request.method == 'GET':
+        form = ProfileEditForm(instance=profile)
+    else:
+        form = ProfileEditForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile-details')
+
+    context = {
+        'profile': profile,
+        'form': form,
+    }
+
+    return render(
+        request,
+        'profile/profile-edit.html',
+        context,
+    )
 
 
 def delete_profile(request):
@@ -58,6 +76,11 @@ def delete_profile(request):
 
 # Expense views
 def create_expanse(request):
+    if request.method == 'GET':
+        pass
+    else:
+        pass
+
     return render(request, 'expense/expense-create.html')
 
 

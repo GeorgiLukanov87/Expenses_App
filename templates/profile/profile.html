@@ -21,10 +21,8 @@
                 <!-- Budget Left -->
                 <p>Budget Left: 100.00$</p>
                 <div class="right">
-                    <!-- Edit Profile Button -->
-                    <a class="button edit" href="#">Edit Profile</a>
-                    <!-- Delete Profile Button -->
-                    <a class="button delete" href="#">Delete Profile</a>
+                    <a class="button edit" href="{% url 'edit-profile' %}">Edit Profile</a>
+                    <a class="button delete" href="{% url 'delete-profile' %}">Delete Profile</a>
                 </div>
             </div>
         </div>
