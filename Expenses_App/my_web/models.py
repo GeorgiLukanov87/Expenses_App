@@ -35,6 +35,7 @@ class Profile(models.Model):
     )
 
     profile_image = models.ImageField(
+        upload_to='images',
         validators=(
             validate_image_size,
         ),
