@@ -18,7 +18,7 @@ def create_profile(request):
     if request.method == 'GET':
         form = ProfileCreateForm()
     else:
-        form = ProfileCreateForm(request.POST)
+        form = ProfileCreateForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('index')
