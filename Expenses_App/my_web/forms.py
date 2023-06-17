@@ -1,6 +1,6 @@
 from django import forms
 
-from Expenses_App.my_web.models import Profile
+from Expenses_App.my_web.models import Profile, Expense
 
 
 class ProfileBaseForm(forms.ModelForm):
@@ -15,3 +15,5 @@ class ProfileCreateForm(ProfileBaseForm):
 
 class ProfileEditForm(ProfileBaseForm):
     pass
+
+

@@ -55,10 +55,19 @@ class Profile(models.Model):
     )
 
     budget = models.FloatField(
+
         default=0,
         validators=(validate_budget,),
+
     )
 
+    def clean(self):
+        if self.budget < 0:
+            raise ValidationError("The budget should not be below 0.")
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
 
 class Expense(models.Model):
@@ -69,6 +78,7 @@ class Expense(models.Model):
     )
 
     expense_image = models.URLField()
+
     description = models.TextField(
         blank=True,
         null=True,

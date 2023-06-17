@@ -1,17 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-
     <div class="body">
-        <!-- Delete Profile Form -->
         <h1>Are you sure you want to delete your profile?</h1>
-        <form method="POST">
+        <form method="POST" action="{% url 'delete-profile' %}">
 
-            <!-- Confirm Button -->
+                {% csrf_token %}
+
             <button class="button delete-lg">Confirm</button>
         </form>
-        <!-- End Delete Profile Form -->
     </div>
 
 {% endblock %}

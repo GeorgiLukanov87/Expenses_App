@@ -71,7 +71,16 @@ def edit_profile(request):
 
 
 def delete_profile(request):
-    return render(request, 'profile/profile-delete.html')
+    if request.method == 'POST':
+        Expense.objects.all().delete()
+        Profile.objects.first().delete()
+        return redirect('index')
+
+    return render(
+        request,
+        'profile/profile-delete.html',
+
+    )
 
 
 # Expense views
