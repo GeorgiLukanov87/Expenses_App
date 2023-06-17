@@ -1,16 +1,20 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 
-
     <div class="body">
-        <!-- Your Profile Data -->
         <h1>Your Profile</h1>
         <div class="expenses-container">
             <div class="expense-container">
-                <!-- Full Name -->
-                <h2>Aleksandra Raykova</h2>
+                <h2>{{ profile.first_name }} {{ profile.last_name }}</h2>
                 <!-- Profile Image -->
-                <img src="/static/images/user.png" alt="profile pic">
+                {% if not profile.profile_image %}
+                    <img src="{% static 'images/user.png' %}" alt="profile pic">
+                {% else %}
+                    <img src="{{ profile.profile_image.url }}" alt="profile pic">
+
+                {% endif %}
+
                 <!-- Profile Description -->
                 <!-- Total Items Bought -->
                 <p>Total Items Bought: 2</p>
@@ -24,7 +28,6 @@
                 </div>
             </div>
         </div>
-        <!-- End Your Profile Data -->
     </div>
 
 {% endblock %}

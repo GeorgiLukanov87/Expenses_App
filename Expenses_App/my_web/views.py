@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from Expenses_App.my_web.forms import ProfileCreateForm
-from Expenses_App.my_web.models import Profile
+from Expenses_App.my_web.models import Profile, Expense
 
 
 # Profile views.
@@ -35,7 +35,17 @@ def create_profile(request):
 
 
 def profile_details(request):
-    return render(request, 'profile/profile.html')
+    profile = Profile.objects.first()
+    expenses = Expense.objects.all()
+    context = {
+        'profile': profile,
+        'expenses': expenses,
+    }
+    return render(
+        request,
+        'profile/profile.html',
+        context,
+    )
 
 
 def edit_profile(request):
