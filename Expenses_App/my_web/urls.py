@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from Expenses_App.my_web.views import index, create_expanse, edit_expanse, delete_expanse, profile_details, \
-    edit_profile, delete_profile
+    edit_profile, delete_profile, create_profile
 
 urlpatterns = (
 
@@ -16,6 +16,7 @@ urlpatterns = (
         path('', profile_details, name='profile-details'),
         path('edit/', edit_profile, name='edit-profile'),
         path('delete/', delete_profile, name='delete-profile'),
+        path('create/', create_profile, name='create-profile'),
     ])),
 )
 

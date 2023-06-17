@@ -1,27 +1,37 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
+from Expenses_App.my_web.forms import ProfileCreateForm
 from Expenses_App.my_web.models import Profile
 
 
+# Profile views.
 def index(request):
-    profile = True
+    profile = Profile.objects.first()
 
-    if profile:
-        return render(request, 'common/home-with-profile.html')
+    if not profile:
+        return redirect('create-profile')
 
-    return render(request, 'common/home-no-profile.html')
-
-
-def create_expanse(request):
-    return render(request, 'expense/expense-create.html')
+    return render(request, 'common/home-with-profile.html')
 
 
-def edit_expanse(request, pk):
-    return render(request, 'expense/expense-edit.html')
+def create_profile(request):
+    if request.method == 'GET':
+        form = ProfileCreateForm()
+    else:
+        form = ProfileCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
 
+    context = {
+        'form': form,
+    }
 
-def delete_expanse(request, pk):
-    return render(request, 'expense/expense-delete.html')
+    return render(
+        request,
+        'common/home-no-profile.html',
+        context,
+    )
 
 
 def profile_details(request):
@@ -34,3 +44,16 @@ def edit_profile(request):
 
 def delete_profile(request):
     return render(request, 'profile/profile-delete.html')
+
+
+# Expense views
+def create_expanse(request):
+    return render(request, 'expense/expense-create.html')
+
+
+def edit_expanse(request, pk):
+    return render(request, 'expense/expense-edit.html')
+
+
+def delete_expanse(request, pk):
+    return render(request, 'expense/expense-delete.html')
