@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <title>Expenses Tracker</title>
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav>
+    <ul>
+        <li class="img"><img src="/static/images/dollar.png" alt="dollar"></li>
+        <li><a href="#">Expenses Tracker</a></li>
+        <li class="right"><a href="#">Profile</a></li>
+    </ul>
+</nav>
+<!-- End Navigation Bar -->
+
+<div class="body">
+    <!-- Summary -->
+    <div>
+        <h1>Summary</h1>
+        <ul class="expenses-list">
+            <!-- User Budget -->
+            <li class="blue">1600.00$</li>
+            <!-- First Expense -->
+            <li class="red"> - 900.00$</li>
+            <!-- Second Expense -->
+            <li class="red"> - 200.00$</li>
+            <!-- Money Left -->
+            <li class="green">= 500.00$ left</li>
+        </ul>
+    </div>
+    <!-- End Summary -->
+
+    <!-- Headline My Expenses -->
+    <h1>My Expenses</h1>
+    <!-- Add Expense Button -->
+    <a class="button add" href="#">Add Expense</a>
+
+    <div class="expenses-container">
+
+        <!-- First Expense Container -->
+        <div class="expense-container">
+            <!-- Expense Title -->
+            <h2>Piano</h2>
+            <!-- Expense Image -->
+            <img src="https://www.pngkit.com/png/full/307-3075914_free-piano-clipart-piano-png.png" alt="description">
+            <!-- Expense Description -->
+            <p>I bought myself a new piano to improve my skills</p>
+            <div class="expense-detail">
+                <div>
+                    <!-- Expense Price -->
+                    <p>Price: 900.00$</p>
+                </div>
+                <div class="right">
+                    <!-- Edit Expense Button -->
+                    <a class="button edit" href="#">Edit</a>
+                    <!-- Delete Expense Button -->
+                    <a class="button delete" href="#">Delete</a>
+                </div>
+            </div>
+        </div>
+        <!-- End First Expense Container -->
+
+        <!-- Second Expense Container -->
+        <div class="expense-container">
+            <h2>Bed</h2>
+            <img src="https://www.pngall.com/wp-content/uploads/2/Double-Bed.png" alt="description">
+            <p>A new bed from ikea</p>
+            <div class="expense-detail">
+                <div>
+                    <p>Price: 200.00$</p>
+                </div>
+                <div class="right">
+                    <a class="button edit" href="#">Edit</a>
+                    <a class="button delete" href="#">Delete</a>
+                </div>
+            </div>
+        </div>
+        <!-- End Second Expense Container -->
+
+    </div>
+</div>
+
+<footer>
+    <div>Python Web Basics Exam Preparation @SoftUni</div>
+</footer>
+
+</body>
+</html>
