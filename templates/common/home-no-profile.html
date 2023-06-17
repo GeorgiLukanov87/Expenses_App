@@ -17,28 +17,27 @@
 </nav>
 <!-- End Navigation Bar -->
 <div class="body">
-
+    <h1>Create Profile:</h1>
     <h1>Enter your data</h1>
-    <!-- Profile Create Form -->
     <div class="form">
-        <form method="POST">
+        <form method="POST" action="{% url 'create-profile' %}">
+
             <label for="budget">Budget</label>
-            <input type="number" name="budget" required="" id="budget">
+            {{ form.budget }}
 
-            <label for="firstName">First Name</label>
-            <input type="text" name="first_name" maxlength="15" required="" id="firstName">
+            <label for="first_name">First Name:</label>
+            {{ form.first_name }}
 
-            <label for="lastName">Last Name</label>
-            <input type="text" name="last_name" maxlength="15" required="" id="lastName">
+            <label for="Last_name">Last Name:</label>
+            {{ form.last_name }}
 
-            <label for="image">Profile Image:</label>
-            <input type="file" class="form-file" name="last_name" id="image">
+            <label for="profile_image">Profile Image:</label>
+            {{ form.profile_image }}
+            {% csrf_token %}
 
-            <!-- Profile Create Button -->
             <input type="submit" value="Submit">
         </form>
     </div>
-    <!-- End Profile Create Form -->
 </div>
 
 <footer>
