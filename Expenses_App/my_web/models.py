@@ -49,3 +49,20 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         self.full_clean()
         super().save(*args, **kwargs)
+
+
+class Expense(models.Model):
+    EXPENSE_MAX_LEN = 30
+
+    title = models.CharField(
+        max_length=EXPENSE_MAX_LEN,
+    )
+
+    expense_image = models.URLField()
+    description = models.TextField(
+        blank=True,
+        null=True,
+    )
+
+    price = models.FloatField()
+
