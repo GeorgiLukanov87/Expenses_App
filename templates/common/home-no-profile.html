@@ -7,17 +7,19 @@
     <div class="form">
         <form method="POST" action="{% url 'create-profile' %}" enctype="multipart/form-data">
 
-            <label for="budget">Budget</label>
-            {{ form.budget }}
+                {{ form.as_p }}
 
-            <label for="first_name">First Name:</label>
-            {{ form.first_name }}
-
-            <label for="Last_name">Last Name:</label>
-            {{ form.last_name }}
-
-            <label for="profile_image">Profile Image:</label>
-            {{ form.profile_image }}
+{#            <label for="budget">Budget</label>#}
+{#            {{ form.budget }}#}
+{##}
+{#            <label for="first_name">First Name:</label>#}
+{#            {{ form.first_name }}#}
+{##}
+{#            <label for="Last_name">Last Name:</label>#}
+{#            {{ form.last_name }}#}
+{##}
+{#            <label for="profile_image">Profile Image:</label>#}
+{#            {{ form.profile_image }}#}
             {% csrf_token %}
 
             <input type="submit" value="Submit">

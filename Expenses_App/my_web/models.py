@@ -34,8 +34,8 @@ class Profile(models.Model):
         validators=(
             validate_file_size_5mb,
         ),
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
     )
 
     first_name = models.CharField(
@@ -61,7 +61,7 @@ class Profile(models.Model):
 
     )
 
-    def clean(self):
+    def clean(self, *args, **kwargs):
         if self.budget < 0:
             raise ValidationError("The budget should not be below 0.")
 
