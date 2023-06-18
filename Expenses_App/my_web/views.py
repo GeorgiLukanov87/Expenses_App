@@ -1,8 +1,9 @@
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from Expenses_App.my_web.forms import ProfileCreateForm, ProfileEditForm
+from Expenses_App.my_web.forms import ProfileCreateForm, ProfileEditForm, DeleteExpenseForm
 
 from Expenses_App.my_web.models import Profile, Expense
 
@@ -166,29 +167,35 @@ class EditExpenseCBV(generic.UpdateView):
 #     )
 
 
-class DeleteExpenseCBV(generic.DeleteView):
-    template_name = 'expense/expense-delete.html'
-    model = Expense
-    fields = "__all__"
-    success_url = '/'
+# class DeleteExpenseCBV(generic.DeleteView):
+#     template_name = 'expense/expense-delete.html'
+#     form_class = DeleteExpenseForm()
+#     model = Expense
+#     fields = "__all__"
+#     success_url = '/'
 
-# def delete_expanse(request, pk):
-#     expanse = Expense.objects.filter(pk=pk).get()
-#
-#     if request.method == 'GET':
-#         form = DeleteExpenseForm(instance=expanse)
-#     else:
-#         form = DeleteExpenseForm(request.POST, instance=expanse)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('index')
-#
-#     context = {
-#         'form': form,
-#     }
-#
-#     return render(
-#         request,
-#         'expense/expense-delete.html',
-#         context,
-#     )
+
+def delete_expense(request, pk):
+    expanse = Expense.objects.filter(pk=pk).get()
+    profile = Profile.objects.first()
+    print(profile.budget)
+    expanse_price = expanse.price
+    if request.method == 'GET':
+        form = DeleteExpenseForm(instance=expanse)
+    else:
+        form = DeleteExpenseForm(request.POST, instance=expanse)
+        if form.is_valid():
+            print(form.cleaned_data)
+            form.save()
+            profile.budget -= expanse_price
+            return redirect('index')
+
+    context = {
+        'form': form,
+    }
+
+    return render(
+        request,
+        'expense/expense-delete.html',
+        context,
+    )

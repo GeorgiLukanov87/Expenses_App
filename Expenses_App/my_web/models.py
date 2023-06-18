@@ -55,7 +55,6 @@ class Profile(models.Model):
     )
 
     budget = models.FloatField(
-
         default=0,
         validators=(validate_budget,),
 

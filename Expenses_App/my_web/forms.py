@@ -9,6 +9,7 @@ class ProfileBaseForm(forms.ModelForm):
         fields = '__all__'
 
 
+
 class ProfileCreateForm(ProfileBaseForm):
     pass
 
