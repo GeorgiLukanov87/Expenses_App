@@ -6,15 +6,15 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <title>Expenses Tracker</title>
 </head>
-
 <body>
-
 
 <nav>
     <ul>
         <li class="img"><img src="{% static 'images/dollar.png' %}" alt="dollar"></li>
         <li><a href="{% url 'index' %}">Expenses Tracker</a></li>
+        {% if profile %}
         <li class="right"><a href="{% url 'profile-details' %}">Profile</a></li>
+        {% endif %}
     </ul>
 </nav>
 
