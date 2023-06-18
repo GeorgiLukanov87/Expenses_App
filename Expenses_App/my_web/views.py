@@ -1,10 +1,16 @@
 from django.shortcuts import render, redirect
-from django.urls import  reverse
+from django.urls import reverse_lazy
 from django.views import generic
 
-from Expenses_App.my_web.forms import ProfileCreateForm, ProfileEditForm, CreateExpenseForm, EditExpenseForm, \
-    DeleteExpenseForm
+from Expenses_App.my_web.forms import ProfileCreateForm, ProfileEditForm
+
 from Expenses_App.my_web.models import Profile, Expense
+
+
+class SingInView(generic.CreateView):
+    template_name = 'common/home-no-profile.html'
+    form_class = ProfileCreateForm
+    success_url = reverse_lazy('index')
 
 
 # Profile views.
@@ -103,10 +109,10 @@ class CreateExpenseCBV(generic.CreateView):
     model = Expense
     fields = '__all__'
 
-    success_url = '/'
+    success_url = "/"
 
     # def get_success_url(self):
-    #     return reverse('create-expanse', kwargs={
+    #     return reverse('index', kwargs={
     #         'pk': self.object.pk,
     #     })
 
