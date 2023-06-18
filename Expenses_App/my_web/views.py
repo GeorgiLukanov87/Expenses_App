@@ -16,8 +16,17 @@ class SingInView(generic.CreateView):
 
 # Profile views.
 def index(request):
+    total_sum = 0
+    diff = 0
+
     profile = Profile.objects.first()
     expenses = Expense.objects.all()
+    if profile:
+        total_sum = sum([float(x.price) for x in expenses])
+        total_sum = profile.budget - total_sum
+        if total_sum < 0:
+            diff = total_sum
+            total_sum = 0
 
     if not profile:
         return redirect('create-profile')
@@ -25,6 +34,9 @@ def index(request):
     context = {
         'profile': profile,
         'expenses': expenses,
+        'budget': profile.budget,
+        'total_sum': total_sum,
+        'diff': diff,
     }
 
     return render(

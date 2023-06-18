@@ -2,18 +2,23 @@
 {% block content %}
 
     <div class="body">
-        <!-- Summary -->
+        <h1>{{ profile.budget }}</h1>
+        <h1>{{ budget }}</h1>
         <div>
             <h1>Summary</h1>
             <ul class="expenses-list">
-                <!-- User Budget -->
-                <li class="blue">1600.00$</li>
-                <!-- First Expense -->
-                <li class="red"> - 900.00$</li>
-                <!-- Second Expense -->
-                <li class="red"> - 200.00$</li>
-                <!-- Money Left -->
-                <li class="green">= 500.00$ left</li>
+                <li class="blue">{{ profile.budget }}$</li>
+
+                {% if expenses %}
+                    {% for expense in expenses %}
+                        <li class="red"> - {{ expense.price }}$</li>
+                    {% endfor %}
+                {% endif %}
+                {% if total_sum %}
+                    <li class="green">= {{ total_sum }}$ left</li>
+                {% else %}
+                    <li class="red"> You are out of budget {{ diff }}$</li>
+                {% endif %}
             </ul>
         </div>
 
