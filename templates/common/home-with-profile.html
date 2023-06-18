@@ -1,70 +1,45 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="body">
-    <!-- Summary -->
-    <div>
-        <h1>Summary</h1>
-        <ul class="expenses-list">
-            <!-- User Budget -->
-            <li class="blue">1600.00$</li>
-            <!-- First Expense -->
-            <li class="red"> - 900.00$</li>
-            <!-- Second Expense -->
-            <li class="red"> - 200.00$</li>
-            <!-- Money Left -->
-            <li class="green">= 500.00$ left</li>
-        </ul>
-    </div>
-    <!-- End Summary -->
-
-    <!-- Headline My Expenses -->
-    <h1>My Expenses</h1>
-
-    <a class="button add" href="{% url 'create-expanse' %}">Add Expense</a>
-
-    <div class="expenses-container">
-
-        <div class="expense-container">
-            <!-- Expense Title -->
-            <h2>Piano</h2>
-            <!-- Expense Image -->
-            <img src="https://www.pngkit.com/png/full/307-3075914_free-piano-clipart-piano-png.png" alt="description">
-            <!-- Expense Description -->
-            <p>I bought myself a new piano to improve my skills</p>
-            <div class="expense-detail">
-                <div>
-                    <!-- Expense Price -->
-                    <p>Price: 900.00$</p>
-                </div>
-                <div class="right">
-                    <!-- Edit Expense Button -->
-                    <a class="button edit" href="#">Edit</a>
-                    <!-- Delete Expense Button -->
-                    <a class="button delete" href="#">Delete</a>
-                </div>
-            </div>
+    <div class="body">
+        <!-- Summary -->
+        <div>
+            <h1>Summary</h1>
+            <ul class="expenses-list">
+                <!-- User Budget -->
+                <li class="blue">1600.00$</li>
+                <!-- First Expense -->
+                <li class="red"> - 900.00$</li>
+                <!-- Second Expense -->
+                <li class="red"> - 200.00$</li>
+                <!-- Money Left -->
+                <li class="green">= 500.00$ left</li>
+            </ul>
         </div>
-        <!-- End First Expense Container -->
 
-        <!-- Second Expense Container -->
-        <div class="expense-container">
-            <h2>Bed</h2>
-            <img src="https://www.pngall.com/wp-content/uploads/2/Double-Bed.png" alt="description">
-            <p>A new bed from ikea</p>
-            <div class="expense-detail">
-                <div>
-                    <p>Price: 200.00$</p>
+        <h1>My Expenses</h1>
+        <a class="button add" href="{% url 'create-expanse' %}">Add Expense</a>
+        <div class="expenses-container">
+
+            {% for expanse in expenses %}
+                <div class="expense-container">
+                    <h2>{{ expanse.title }}</h2>
+                    <img src="{{ expanse.expense_image }}"
+                         alt="description">
+                    <p>{{ expanse.description }}</p>
+                    <div class="expense-detail">
+                        <div>
+                            <p>Price: {{ expanse.price|floatformat:2 }}$</p>
+                        </div>
+                        <div class="right">
+                            <a class="button edit" href="{% url 'edit-expanse' pk=expanse.pk %}">Edit</a>
+                            <a class="button delete" href="{% url 'delete-expanse' pk=expanse.pk %}">Delete</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="right">
-                    <a class="button edit" href="#">Edit</a>
-                    <a class="button delete" href="#">Delete</a>
-                </div>
-            </div>
+            {% endfor %}
+
         </div>
-        <!-- End Second Expense Container -->
-
     </div>
-</div>
 
 {% endblock %}

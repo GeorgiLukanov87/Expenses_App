@@ -10,21 +10,10 @@
     <!-- Edit Expense Form -->
     <div class="form">
         <form method="POST">
-            <label for="title">Title</label>
-            <input type="text" name="title" value="Electrical Piano" maxlength="50" required="" id="title">
 
-            <label for="description">Description</label>
-            <textarea name="description" cols="40" rows="10" id="description"
-            >I bought myself a new piano to improve my skills</textarea>
+            {{ form }}
+            {% csrf_token %}
 
-            <label for="image_url">Link to Image</label>
-            <input type="url" name="image_url"
-                   value="https://www.pngkit.com/png/full/307-3075914_free-piano-clipart-piano-png.png" maxlength="200"
-                   required="" id="image_url">
-
-            <label for="price">Price</label>
-            <input type="number" name="price" value="1000.0" step="any" required="" id="price">
-            <!-- Edit Button -->
             <input type="submit" value="Edit">
         </form>
         <!-- End Edit Expense Form -->

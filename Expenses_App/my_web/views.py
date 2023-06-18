@@ -1,17 +1,30 @@
 from django.shortcuts import render, redirect
+from django.urls import  reverse
+from django.views import generic
 
-from Expenses_App.my_web.forms import ProfileCreateForm, ProfileEditForm
+from Expenses_App.my_web.forms import ProfileCreateForm, ProfileEditForm, CreateExpenseForm, EditExpenseForm, \
+    DeleteExpenseForm
 from Expenses_App.my_web.models import Profile, Expense
 
 
 # Profile views.
 def index(request):
     profile = Profile.objects.first()
+    expenses = Expense.objects.all()
 
     if not profile:
         return redirect('create-profile')
 
-    return render(request, 'common/home-with-profile.html')
+    context = {
+        'profile': profile,
+        'expenses': expenses,
+    }
+
+    return render(
+        request,
+        'common/home-with-profile.html',
+        context,
+    )
 
 
 def create_profile(request):
@@ -84,18 +97,92 @@ def delete_profile(request):
 
 
 # Expense views
-def create_expanse(request):
-    if request.method == 'GET':
-        pass
-    else:
-        pass
 
-    return render(request, 'expense/expense-create.html')
+class CreateExpenseCBV(generic.CreateView):
+    template_name = 'expense/expense-create.html'
+    model = Expense
+    fields = '__all__'
+
+    success_url = '/'
+
+    # def get_success_url(self):
+    #     return reverse('create-expanse', kwargs={
+    #         'pk': self.object.pk,
+    #     })
 
 
-def edit_expanse(request, pk):
-    return render(request, 'expense/expense-edit.html')
+# def create_expanse(request):
+#     if request.method == 'GET':
+#         form = CreateExpenseForm()
+#     else:
+#         form = CreateExpenseForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('index')
+#
+#     context = {
+#         'form': form,
+#     }
+#
+#     return render(
+#         request,
+#         'expense/expense-create.html',
+#         context,
+#     )
 
 
-def delete_expanse(request, pk):
-    return render(request, 'expense/expense-delete.html')
+class EditExpenseCBV(generic.UpdateView):
+    template_name = 'expense/expense-edit.html'
+    model = Expense
+    fields = '__all__'
+    success_url = '/'
+
+
+# def edit_expanse(request, pk):
+#     expanse = Expense.objects.filter(pk=pk).get()
+#
+#     if request.method == 'GET':
+#         form = EditExpenseForm(instance=expanse)
+#     else:
+#         form = EditExpenseForm(request.POST, instance=expanse)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('index')
+#
+#     context = {
+#         'expanse': expanse,
+#         'form': form,
+#     }
+#     return render(
+#         request,
+#         'expense/expense-edit.html',
+#         context,
+#     )
+
+
+class DeleteExpenseCBV(generic.DeleteView):
+    template_name = 'expense/expense-delete.html'
+    model = Expense
+    fields = "__all__"
+    success_url = '/'
+
+# def delete_expanse(request, pk):
+#     expanse = Expense.objects.filter(pk=pk).get()
+#
+#     if request.method == 'GET':
+#         form = DeleteExpenseForm(instance=expanse)
+#     else:
+#         form = DeleteExpenseForm(request.POST, instance=expanse)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('index')
+#
+#     context = {
+#         'form': form,
+#     }
+#
+#     return render(
+#         request,
+#         'expense/expense-delete.html',
+#         context,
+#     )

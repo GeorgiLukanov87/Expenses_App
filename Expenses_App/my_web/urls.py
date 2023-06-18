@@ -1,15 +1,15 @@
 from django.urls import path, include
 
-from Expenses_App.my_web.views import index, create_expanse, edit_expanse, delete_expanse, profile_details, \
-    edit_profile, delete_profile, create_profile
+from Expenses_App.my_web.views import index, profile_details, \
+    edit_profile, delete_profile, create_profile, DeleteExpenseCBV, EditExpenseCBV, CreateExpenseCBV
 
 urlpatterns = (
 
     path('', include([
         path('', index, name='index'),
-        path('create/', create_expanse, name='create-expanse'),
-        path('edit/<int:pk>/', edit_expanse, name='edit-expanse'),
-        path('delete/<int:pk>/', delete_expanse, name='delete-expanse'),
+        path('create/', CreateExpenseCBV.as_view(), name='create-expanse'),
+        path('edit/<int:pk>/', EditExpenseCBV.as_view(), name='edit-expanse'),
+        path('delete/<int:pk>/', DeleteExpenseCBV.as_view(), name='delete-expanse'),
     ])),
 
     path('profile/', include([
