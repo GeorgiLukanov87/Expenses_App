@@ -29,13 +29,10 @@ class Profile(models.Model):
     LAST_NAME_MIN_LEN = 2
     LAST_NAME_MIN_LEN_MSG_ERROR = 'First name must be at least 2 chars!'
 
-    profile_image = models.ImageField(
-        upload_to='images',
-        validators=(
-            validate_file_size_5mb,
-        ),
-        blank=True,
-        null=True,
+    budget = models.FloatField(
+        default=0,
+        validators=(validate_budget,),
+
     )
 
     first_name = models.CharField(
@@ -54,10 +51,13 @@ class Profile(models.Model):
         )
     )
 
-    budget = models.FloatField(
-        default=0,
-        validators=(validate_budget,),
-
+    profile_image = models.ImageField(
+        upload_to='images',
+        validators=(
+            validate_file_size_5mb,
+        ),
+        blank=True,
+        null=True,
     )
 
     def clean(self, *args, **kwargs):
@@ -75,12 +75,11 @@ class Expense(models.Model):
     title = models.CharField(
         max_length=EXPENSE_MAX_LEN,
     )
-
-    expense_image = models.URLField()
-
     description = models.TextField(
         blank=True,
         null=True,
     )
+
+    expense_image = models.URLField()
 
     price = models.FloatField()

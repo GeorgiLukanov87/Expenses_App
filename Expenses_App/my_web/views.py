@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
@@ -103,15 +102,16 @@ def edit_profile(request):
 
 
 def delete_profile(request):
+    profile = Profile.objects.first()
     if request.method == 'POST':
         Expense.objects.all().delete()
+        profile.profile_image.delete()
         Profile.objects.first().delete()
         return redirect('index')
 
     return render(
         request,
         'profile/profile-delete.html',
-
     )
 
 

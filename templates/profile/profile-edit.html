@@ -5,18 +5,18 @@
         <div class="form">
             <form method="POST" action="{% url 'edit-profile' %}" enctype="multipart/form-data">
 
-
-                <label for="">Budget</label>
-                {{ form.budget }}
-
-                <label for="">First Name:</label>
-                {{ form.first_name }}
-
-                <label for="">Last Name:</label>
-                {{ form.last_name }}
-
-                <label for="">Profile Picture:</label>
-                {{ form.profile_image }}
+                    {{ form }}
+{#                <label for="">Budget</label>#}
+{#                {{ form.budget }}#}
+{##}
+{#                <label for="">First Name:</label>#}
+{#                {{ form.first_name }}#}
+{##}
+{#                <label for="">Last Name:</label>#}
+{#                {{ form.last_name }}#}
+{##}
+{#                <label for="">Profile Picture:</label>#}
+{#                {{ form.profile_image }}#}
 
                 {% csrf_token %}
 
