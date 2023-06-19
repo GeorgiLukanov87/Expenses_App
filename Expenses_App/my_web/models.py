@@ -5,9 +5,8 @@ from django.core.exceptions import ValidationError
 
 
 def validate_only_letters(value):
-    for char in value:
-        if not char.isalpha():
-            raise ValidationError('Ensure this value contains only letters.')
+    if not value.isalpha():
+        raise ValidationError('Ensure this value contains only letters.')
 
 
 def validate_budget(value):
